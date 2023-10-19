@@ -1,0 +1,19 @@
+{
+  "name": "ts-base",
+  "version": "1.0.0",
+  "main": "dist/out-tsc/packages/ts-base/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc --build"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
+
+
+
+
+
+
