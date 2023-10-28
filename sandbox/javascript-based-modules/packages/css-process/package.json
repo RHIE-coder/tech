@@ -1,0 +1,22 @@
+{
+  "name": "css-process",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "sass src:.",
+    "no-map-build": "sass --no-source-map src:.",
+    "watch": "sass -w src:."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^6.0.1",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "postcss-preset-env": "^9.2.0",
+    "postcss-scss": "^4.0.9",
+    "sass": "^1.69.5"
+  }
+}
