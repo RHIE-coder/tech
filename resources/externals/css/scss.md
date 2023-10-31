@@ -25,6 +25,43 @@ body {
 }
 ```
 
+## Types
+
+https://sass-lang.com/documentation/values/calculations/
+
+ - Numbers
+ - Strings
+ - Colors
+ - Booleans
+ - Nulls
+ - Lists
+ - Maps
+
+## `#{}`
+
+코드의 어디든지 변수 값을 넣을 수 있음
+
+```scss
+$family: unquote("Droid+Sans");
+@import url("http://fonts.googleapis.com/css?family=#{$family}");
+
+@import url("http://fonts.googleapis.com/css?family=Droid+Sans");
+```
+
+Sass의 내장 함수 `unquote()`는 문자에서 따옴표를 제거합니다.
+
+## Builtins
+
+https://sass-lang.com/documentation/modules/
+
+ - sass:color
+ - sass:list
+ - sass:map
+ - sass:math
+ - sass:meta
+ - sass:selector
+ - sass:string
+
 # nesting
 
 ```scss
@@ -152,4 +189,57 @@ body {
 width: 150px - 20px;
 width: calc(100% - 10rem);
 width: 100% - 10rem; // ERROR
+```
+
+# Flow Control
+
+# if-else
+ - @if
+ - @else if
+ - @else
+
+```scss
+$light-background: #f2ece4;
+$light-text: #036;
+$dark-background: #6b717f;
+$dark-text: #d2e1dd;
+
+@mixin theme-colors($light-theme: true) {
+    @if $light-theme {
+        background-color: $light-background;
+        color: $light-text;
+    } @else {
+        background-color: $dark-background;
+        color: $dark-text;
+    }
+}
+```
+
+```scss
+@use "sass:math";
+
+@mixin triangle($size, $color, $direction) {
+  height: 0;
+  width: 0;
+
+  border-color: transparent;
+  border-style: solid;
+  border-width: math.div($size, 2);
+
+  @if $direction == up {
+    border-bottom-color: $color;
+  } @else if $direction == right {
+    border-left-color: $color;
+  } @else if $direction == down {
+    border-top-color: $color;
+  } @else if $direction == left {
+    border-right-color: $color;
+  } @else {
+    @error "Unknown direction #{$direction}.";
+  }
+}
+
+.next {
+  @include triangle(5px, black, right);
+}
 ```

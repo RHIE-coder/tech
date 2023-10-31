@@ -1,14 +1,11 @@
-import '@/App.scss'
-
+import {Routes, Route} from 'react-router-dom';
+import ColorShow from '@/pages/ColorShow';
 
 function App() {
-
   return (
-    <>
-      <div className="container">
-        <h1>Hello World</h1> 
-      </div>
-    </>
+    <Routes>
+      <Route index element={<ColorShow />} />
+    </Routes>
   )
 }
 

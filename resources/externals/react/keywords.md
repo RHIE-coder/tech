@@ -8,32 +8,32 @@
    - MyComponent.propTypes = { name: PropTypes.string }
 # ( React Events Type )
 # Class Component 
-## state
+## - state
  - this.state
  - this.setState({number: number + 1})
  - this.setState((prevState)=>{ return { ... }})
  - this.setState((prevState, props)=> { return { ... }})
  - this.setState({ ... }, ()=>{ ... })
-## life cycle
+## - life cycle
 
 # Function Component
-## useState
+## - useState
 
  - `const [name, setName] = useState('');`
 
-## useEffect
+## - useEffect
 
  - `useEffect(()=>{ ... })`
  - `useEffect(()=>{ ... },[])`
  - `useEffect(()=>{ ... }, [name])`
  - `useEffect(()=>{ return ()=>{...} }, [name])`
 
-## useReducer
+## - useReducer
 
  - function reducer(state, action) {}
  - `const [state, dispatch] = useReducer(reducer, {});`
 
-## useMemo
+## - useMemo
 
 ```js
 const avg = useMemo(()=>getAverage(list), [list])
@@ -44,7 +44,7 @@ const avg = useMemo(()=>getAverage(list), [list])
 </div>
 ```
 
-## useCallback
+## - useCallback
 
 ```js
 const onChange = useCallback(()=>{
@@ -52,7 +52,7 @@ const onChange = useCallback(()=>{
 }, [])
 ```
 
-## useRef
+## - useRef
 
 랜더링해도 값이 변경안됨
 
@@ -63,4 +63,45 @@ const input$ = useRef(null);
 input$.current.focus();
 ```
 
+# CSS
 
+## - CSS Module
+
+ - `import classNames from 'classnames';`
+ - `import classNames from 'classnames/bind';`
+
+```jsx
+import classNames from 'classnames/bind';
+import styles from './CSSModule.module.css';
+
+const cx = classNames.bind(styles);
+
+export default function CSSModule() {
+  return (
+    <div className={cx('wrapper', 'inverted')}>
+      Hello World
+    </div>
+  )
+}
+```
+
+## - styled-components
+
+
+## CSS Module vs styled-components
+
+https://puruvj.dev/blog/move-to-css-modules-from-styled-componentss
+
+# react-virtualized
+
+# immer
+
+# react-router-dom
+
+## - BrowseRouter, Routes, Route, Outlet
+## - useParams, useSearchParams, (useLocation)
+## - Link, NavLink, useNavigation, Navigation
+
+# Context API
+## - Provider, Consumer(rarely use)
+## - useContext
