@@ -126,17 +126,163 @@ func main() {
 ## - Quick Sort
 
 ```golang
+/* this file is not instruct how to use, while only for running */
+package main
 
+import "fmt"
+
+func QuickSort(arr []int) {
+	quickSort(arr, 0, len(arr)-1)
+}
+
+func quickSort(arr []int, start int, end int) {
+	part := partition(arr, start, end)
+	if start < part-1 {
+		quickSort(arr, start, part-1)
+	}
+	if part < end {
+		quickSort(arr, part, end)
+	}
+}
+
+func partition(arr []int, start int, end int) int {
+	pivot := arr[(start+end)/2]
+
+	for start <= end {
+		for arr[start] < pivot {
+			start++
+		}
+
+		for arr[end] > pivot {
+			end--
+		}
+
+		if start <= end {
+			arr[start], arr[end] = arr[end], arr[start]
+			start++
+			end--
+		}
+	}
+
+	return start
+}
+func main() {
+	// source := []int{5, 4, 9, 7, 6, 2, 7, 4, 9, 2, 2, 7}
+	// source := []int{3, 9, 4, 7, 5, 0, 1, 6, 8, 2}
+	// source := []int{4, 3, 1}
+	// source := []int{1, 3, 1}
+	source := []int{5, 1, 3, 1, 2, 1, 1}
+
+	fmt.Println(source)
+	QuickSort(source)
+	fmt.Println(source)
+}
 ```
 
 ## - Insert Sort
 
 ```golang
+package main
 
+import "fmt"
+
+func main() {
+	// source := []int{5, 4, 9, 7, 6, 2, 7, 4, 9, 2, 2, 7}
+	// source := []int{3, 9, 4, 7, 5, 0, 1, 6, 8, 2}
+	// source := []int{4, 3, 1}
+	// source := []int{1, 3, 1}
+	source := []int{5, 1, 3, 1, 2, 1, 1}
+
+	fmt.Println(source)
+
+	for i := 1; i < len(source); i++ {
+		key := source[i]
+		j := i - 1
+		for j >= 0 && source[j] > key {
+			source[j+1] = source[j]
+			j--
+		}
+		source[j+1] = key
+	}
+
+	fmt.Println(source)
+}
 ```
 
 ## - Merge Sort
 
 ```golang
+package main
 
+import (
+	"fmt"
+)
+
+func MergeSort(origin []int) {
+	sharedTempArr := make([]int, len(origin))
+	mergeSort(origin, sharedTempArr, 0, len(origin)-1)
+}
+
+func mergeSort(origin []int, tmp []int, start int, end int) {
+	if start < end { // except 1 length
+		mid := start + (end-start)/2 // decrease overflow danger
+		mergeSort(origin, tmp, start, mid)
+		mergeSort(origin, tmp, mid+1, end)
+		merge(origin, tmp, start, mid, end)
+	}
+
+}
+
+func merge(origin []int, tmp []int, start int, mid int, end int) {
+	for i := start; i <= end; i++ {
+		tmp[i] = origin[i]
+	}
+
+	idxL := start
+	idxR := mid + 1
+	idxOrigin := start
+
+	// one of them will be all selected
+	for idxL <= mid && idxR <= end {
+		if tmp[idxL] <= tmp[idxR] {
+			origin[idxOrigin] = tmp[idxL]
+			idxL++
+		} else {
+			origin[idxOrigin] = tmp[idxR]
+			idxR++
+		}
+		idxOrigin++
+	}
+
+	for idxL <= mid {
+		origin[idxOrigin] = tmp[idxL]
+		idxL++
+		idxOrigin++
+	}
+
+	for idxR <= end {
+		origin[idxOrigin] = tmp[idxR]
+		idxR++
+		idxOrigin++
+	}
+
+    /* 
+    for i := 0; i <= mid-idxL; i++ {
+		source[idxOrigin+i] = tmp[idxL+i]
+	}
+    */
+
+}
+
+func main() {
+	source := []int{5, 4, 9, 7, 6, 2, 7, 4, 9, 2, 2, 7}
+	// source := []int{3, 9, 4, 7, 5, 0, 1, 6, 8, 2}
+	// source := []int{4, 3, 1}
+	// source := []int{1, 3, 1}
+	// source := []int{5, 1, 3, 1, 2, 1, 1}
+
+	fmt.Println(source)
+	MergeSort(source)
+	fmt.Println(source)
+}
 ```
