@@ -1,5 +1,27 @@
-/* this file is not instruct how to use, while only for running */
-package main
+# 연결 리스트
+
+ - Head - [Data-Link] - [Data-Link] - [Data-None]
+
+```golang
+
+```
+
+# 이중 연결 리스트
+
+ - [prev-data-next]
+ - Head - [None-Data-Next]-[Prev-Data-Next]-[Prev-Data-None]
+
+```golang
+
+```
+
+# Golang `container/list`
+
+Doubly Linked List
+
+ - https://pkg.go.dev/container/list@go1.21.3#List
+
+```golang
 
 import (
 	"container/list"
@@ -32,3 +54,4 @@ func main() {
 
 	PrintList(l) // [ 10 -> 30 -> 20 -> 40 -> 50 ]
 }
+```

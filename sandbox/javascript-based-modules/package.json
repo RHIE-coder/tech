@@ -9,6 +9,10 @@
   "workspaces": [
     "packages/**"
   ],
+  "scripts": {
+    "exec": "lerna run exec --scope=runner",
+    "exec:server": "lerna run exec --scope=simple-test-server"
+  },
   "devDependencies": {
     "@nx/jest": "^16.10.0",
     "@types/jest": "^29.5.5",
