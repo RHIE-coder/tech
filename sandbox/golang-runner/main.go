@@ -2,33 +2,46 @@
 package main
 
 import (
-	"container/list"
+	"encoding/json"
 	"fmt"
+	"io"
+	"net/http"
 )
 
-func PrintList(l *list.List) {
-	fmt.Print("[ ")
-	for e := l.Front(); e != nil; e = e.Next() {
-		fmt.Print(e.Value)
-
-		if e.Next() != nil {
-			fmt.Print(" -> ")
-		}
-	}
-	fmt.Println(" ]")
-}
-
 func main() {
-	l := list.New()
-	l.PushBack(10)
-	pointA := l.PushBack(20)
-	l.PushBack(30)
-	pointB := l.PushBack(40)
-	l.PushBack(50)
+	reqToServer := func() {
+		req, err := http.NewRequest("", "http://localhost:8000", body)
+		if err != nil {
+			panic(err)
+		}
+		req.Header.Set("Content-Type", "application/json")
+		client := &http.Client{}
+		fmt.Println("request!!")
+		resp, err := client.Do(req)
+		fmt.Println("response!!")
+		if err != nil {
+			panic(err)
+		}
+		defer resp.Body.Close()
+		var data map[string]interface{}
+		if err := json.NewDecoder(resp.Body).Decode(&data); err != nil {
+			panic(err)
+		}
+		json.MarshalIndent(data, "", "  ")
+		fmt.Println(data)
+	}
+	// GET 호출
+	resp, err := http.Get("http://localhost:3000")
+	if err != nil {
+		panic(err)
+	}
 
-	PrintList(l) // [ 10 -> 20 -> 30 -> 40 -> 50 ]
+	defer resp.Body.Close()
 
-	l.MoveBefore(pointA, pointB)
-
-	PrintList(l) // [ 10 -> 30 -> 20 -> 40 -> 50 ]
+	// 결과 출력
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%s\n", string(data))
 }

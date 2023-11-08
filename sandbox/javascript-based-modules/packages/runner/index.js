@@ -7,101 +7,37 @@ const https = require('https');
 const team = "Chelsea"
 const year = 2014
 
+async function getData(team, year) {
 
-async function requestToServer(team, year, page) {
+    let total = 0;
+
+
+    axios.defaults.baseURL="http://localhost:3000";
+    axios.defaults.httpAgent= new require('http').Agent({
+        keepAlive:true,
+        scheduling:"fifo",
+        maxFreeSockets:5000,
+    })
+
     const instance = axios.create()
 
-    return (await instance({
-        method:`GET`,
-        url:`https://jsonmock.hackerrank.com/api/football_matches?year=${year}&team=${team}&page=${page}`,
-        httpsAgent: new https.Agent({ 
-            keepAlive: true,
-            maxCachedSessions: 150,
-        }),
-    })).data
-}
-
-function sleep(millisecond) {
-  return new Promise((resolve)=>{
-    setTimeout(()=>{
-      resolve(true)
-    },millisecond)
-  })
-}
-
-async function getData(team, year) {
-    // const client = axios({
-    //     method:`GET`,
-    //     // url:`https://jsonmock.hackerrank.com/api/football_matches?year=${year}&team=${team}&page=${page}`,
-    //     url:`http://localhost:3000`,
-    //     httpAgent: new require("http").Agent({ 
-    //         keepAlive: true,
-    //         maxCachedSessions: 150,
-    //     }),
-    //     httpsAgent: new https.Agent({ 
-    //         keepAlive: true,
-    //         maxCachedSessions: 150,
-    //     }),
-    // })
-
-    const instance = axios.create({
-        httpAgent: new require('http').Agent({ 
-            keepAlive: true,
-            maxCachedSessions: 1000,
-            maxFreeSockets: 5000,
-        }),
-    })
 
     const tasks = []
 
-    for(let i = 0; i < 10000; i++) {
-        console.log(i)
-        tasks.push(async function(){
-            return (await instance({
-                method:`GET`,
-                url:`http://localhost:3000`,
-            })).data
+    for(let i = 0; i < 3000; i++) {
+        instance.request({
+            url:"/",
         })
+        // instance.request({
+        //     url: "/" 
+        // }).then(()=>{
+        // tasks.push(i)
+        //     total += 1
+        // })
     } 
 
     console.log(" ------ ", tasks.length)
-    
-    re = await Promise.all(tasks.map(async(elem)=>{
-        return await elem()
-    }))
-
-    // const preload = await requestToServer(team,year,1);
-
-    // if(preload.data.length === 0) {
-    //     return 0;
-    // }
-
-    // const tasks = []
-
-
-    // for(let i = 1; i <= preload.total_pages; i++) {
-    //     tasks.push((async function(team, year, page){
-    //         console.log(page)
-    //         let totalGoal = 0;
-    //         const res = await requestToServer(team,year, page);
-    //         for(let i = 0; i < res.data.length; i++) {
-    //             if(res.data[i].team1 === team) {
-    //                 totalGoal += parseInt(res.data[i].team1goals, 10);
-    //             }
-
-    //             if(res.data[i].team2 === team) {
-    //                 totalGoal += parseInt(res.data[i].team2goals, 10);
-    //             }
-    //         } 
-    //         return totalGoal;
-    //     })(team, year, i))
-    // }
-
-    // const result = await Promise.all(tasks)
-
-    // console.log(result.reduce((prev, cur)=>{
-    //     return prev+cur
-    // }))
+    console.log(total) 
 }
 
 async function main(){
