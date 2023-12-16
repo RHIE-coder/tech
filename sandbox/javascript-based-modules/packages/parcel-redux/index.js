@@ -1,12 +1,15 @@
-import { 
+import {
     configureStore,
     createSlice,
     createAsyncThunk,
 } from '@reduxjs/toolkit';
 
-import * as forPrintAll from '@reduxjs/toolkit'
+import
+    * as forPrintAll
+    from '@reduxjs/toolkit'
 console.log(forPrintAll)
 
+////////////////////////////////////////
 function $(selector) {
     return document.querySelector(selector);
 }
@@ -18,9 +21,9 @@ const $btnDecrease = $("#decrease")
 const $inputAmount = $("#amount")
 const $btnUpdate = $("#update")
 ////////////////////////////////////////
-const asyncToggle = createAsyncThunk('asyncToggle', (param)=>{
-    return new Promise((resolve, reject)=>{
-        setTimeout(()=>{
+const asyncToggle = createAsyncThunk('asyncToggle', (param) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
             console.log("setTimeout")
             console.log(param)
             resolve("sss")
@@ -28,17 +31,17 @@ const asyncToggle = createAsyncThunk('asyncToggle', (param)=>{
     })
 })
 
-const asyncPlus = createAsyncThunk('asyncPlus', (param)=>{
-    return new Promise((resolve, reject)=>{
-        setTimeout(()=>{
+const asyncPlus = createAsyncThunk('asyncPlus', (param) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
             resolve("sss1")
         }, 3000)
     })
 })
 
-const asyncMinus = createAsyncThunk('asyncMinus', (param)=>{
-    return new Promise((resolve, reject)=>{
-        setTimeout(()=>{
+const asyncMinus = createAsyncThunk('asyncMinus', (param) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
             resolve("sss2")
         }, 2000)
     })
@@ -111,7 +114,7 @@ const counterActions = counterSlice.actions;
 const counterReducer = counterSlice.reducer;
 
 const store = configureStore({
-    reducer:{
+    reducer: {
         counter: counterReducer,
         figure: figureReducer,
     }
@@ -121,7 +124,7 @@ function render() {
     const state = store.getState();
     console.log("render(): result of getState() : " + JSON.stringify(state))
 
-    if(state.figure.toggle) {
+    if (state.figure.toggle) {
         $divToggle.classList.add('active');
     } else {
         $divToggle.classList.remove('active');
@@ -149,6 +152,6 @@ $btnDecrease.onclick = () => {
 
 $btnUpdate.onclick = () => {
     const amount = parseInt($inputAmount.value)
-    store.dispatch(counterActions.updateByAmount({amount})); 
+    store.dispatch(counterActions.updateByAmount({ amount }));
     $inputAmount.value = 0
 };
