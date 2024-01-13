@@ -1,0 +1,16 @@
+GET http://localhost:8000/
+
+###
+
+GET http://localhost:8000/items/55?q=1234
+
+###
+
+PUT http://localhost:8000/items/33
+Content-Type: application/json
+
+{
+    "name": "rhie",
+    "price": 101010,
+    "is_offer": true
+}

@@ -1,0 +1,36 @@
+GET http://localhost:8000/
+
+###
+
+GET http://localhost:8000/err
+
+###
+
+GET http://localhost:8000/dataformat
+
+###
+
+GET http://localhost:8000/files/tech/sandbox/python-fastapi
+
+###
+
+GET http://localhost:8000/items/format
+
+###
+
+GET http://localhost:8000/items/55?q=1234a
+
+###
+
+PUT http://localhost:8000/items/33
+Content-Type: application/json
+
+{
+    "name": "rhie",
+    "price": 101010,
+    "is_offer": true
+}
+
+###
+
+GET http://localhost:8000/aimodel/alexnet
