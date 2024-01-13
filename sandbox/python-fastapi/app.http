@@ -1,3 +1,14 @@
+POST http://localhost:8000/test
+Content-Type: application/json
+
+{
+    "name": "rhie",
+    "price": 101010,
+    "is_offer": true
+}
+
+###
+
 GET http://localhost:8000/
 
 ###

@@ -42,6 +42,10 @@ async def item_format()->Item:
         is_offer=False,
     )
 
+@app.post("/test")
+async def create_item(item: Item)->Item:
+    return item
+
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[int, None] = None):
     return {"item_id": item_id, "q": q}
@@ -52,5 +56,5 @@ async def get_model(model_name:ModelName):
 
 # pydantic: 파라미터 에러처리
 # pydantic: 모델 validator
+# fastapi: def, async def에 따른 성능차이
 # fastapi: recover, exception
-# fastapi: swagger response model set
