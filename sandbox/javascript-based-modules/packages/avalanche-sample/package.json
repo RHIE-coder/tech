@@ -1,0 +1,12 @@
+{
+  "name": "avalanche-sample",
+  "version": "1.0.0",
+  "description": "avalanche test",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "rhie-coder",
+  "license": "UNLICENSED"
+}
