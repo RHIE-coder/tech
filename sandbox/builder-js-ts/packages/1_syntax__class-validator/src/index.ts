@@ -1,3 +1,3 @@
 (async () => {
-  await import("@validator/Script");
+  await import("@transform/User");
 })();

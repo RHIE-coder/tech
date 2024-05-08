@@ -12,3 +12,7 @@
   "editor.formatOnSave": true
 }
 ```
+
+# Delete Unused Imports
+
+`Option` + `Control` + `o`

@@ -13,7 +13,8 @@
     "baseUrl": "./",
     "paths": {
       "@utils/*": ["./src/utils/*"],
-      "@validator/*": ["./src/validator/*"]
+      "@validator/*": ["./src/validator/*"],
+      "@transform/*": ["./src/transform/*"]
     },
     "rootDir": "./",
     "outDir": "./build",
