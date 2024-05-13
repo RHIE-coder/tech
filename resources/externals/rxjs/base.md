@@ -576,10 +576,6 @@ task: value = 512
 */
 ```
 
-
-
-
-
 # `Operator`
 
 ## Creation
