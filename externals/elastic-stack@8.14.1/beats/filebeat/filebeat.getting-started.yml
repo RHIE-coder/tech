@@ -1,0 +1,27 @@
+name: filebeat-specific
+setup.ilm.enabled: false
+setup.template.enabled: true
+setup.template.overwrite: true
+setup.template.name: "docker-logs"
+setup.template.pattern: "docker-logs-*"
+
+filebeat.inputs:
+- type: container
+  ignore_older: 24h  # 24시간 이전에 수정된 파일은 무시
+  processors:
+  - add_docker_metadata: ~ # 도커 관련 메타데이터 수집: docker.sock 필요
+  - drop_event:
+      when:
+        or:
+          - not.equals.container.name: "nginx"
+          - not.contains.message: "INFO"
+  fields:
+    container_type: docker
+    environment: production
+    team: devops
+  paths: 
+    - '/var/lib/docker/containers/*/*.log'
+
+output.elasticsearch:
+  hosts: ['192.168.9.5:9200']
+  index: "docker-logs-%{+yyyy.MM.dd}"

@@ -1,0 +1,22 @@
+############################################################
+# 설정된 index-pattern 조회
+
+GET http://192.168.9.5:9200/.kibana/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "term": {
+      "type": {
+        "value": "index-pattern"
+      }
+    }
+  },
+  "_source": ["index-pattern.title"]
+}
+
+
+############################################################
+# index-pattern 삭제
+
+DELETE http://192.168.9.5:9200/.kibana/_doc/index-pattern:5355bcb0-32b2-11ef-b915-19aaff8d6a4d

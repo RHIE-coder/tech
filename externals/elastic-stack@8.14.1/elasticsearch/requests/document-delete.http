@@ -1,0 +1,27 @@
+############################################################
+# 설정된 index-pattern 조회
+
+POST http://192.168.9.5:9200/docker-logs-*/_delete_by_query
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match_phrase": { "fields.id": "nitro-1" } }
+      ]
+    }
+  }
+}
+
+
+
+###
+
+{
+  "query": {
+    "term": {
+      "fields.id.keyword": "nitro-1"
+    }
+  }
+}

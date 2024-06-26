@@ -1,0 +1,24 @@
+############################################################
+# index의 document 조회
+
+GET http://192.168.9.5:9200/docker-logs-*/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match_phrase": { "agent.id.keyword": "4e7d7853-9dbe-4a8e-978c-8f587c948eab" } },
+        { "match_phrase": { "fields.team": "developer" } }
+      ]
+    }
+  },
+  "size": 1
+}
+
+
+
+############################################################
+# index의 데이터 삭제
+
+DELETE http://192.168.9.5:9200/docker-logs-*
