@@ -1,0 +1,3 @@
+[submodule "externals/geth/research/ethereum-pos-testnet"]
+	path = externals/geth/research/ethereum-pos-testnet
+	url = https://github.com/rzmahmood/ethereum-pos-testnet

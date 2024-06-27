@@ -2,6 +2,11 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:7.17.11
     container_name: filebeat
+    logging:
+      driver: "local"
+      options:
+        max-size: "10m"
+        max-file: "3"
     user: root
     volumes:
       - ./.env:/usr/share/filebeat/.env:ro

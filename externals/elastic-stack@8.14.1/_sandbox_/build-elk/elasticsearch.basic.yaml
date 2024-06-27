@@ -1,0 +1,3 @@
+xpack.license.self_generated.type: basic
+discovery.type: single-node
+xpack.security.enabled: true

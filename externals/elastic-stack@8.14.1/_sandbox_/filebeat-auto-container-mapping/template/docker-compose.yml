@@ -1,0 +1,23 @@
+services:
+    filebeat:
+        image: docker.elastic.co/beats/filebeat:7.17.11
+        container_name: filebeat
+        logging:
+            driver: 'local'
+            options:
+                max-size: '10m'
+                max-file: '3'
+        user: root
+        volumes:
+            - ${#__PROJECT_PATH__#}/.build/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro
+            - ${#__PROJECT_PATH__#}/.build/registry:/usr/share/filebeat/data/registry
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - /var/lib/docker/containers/${#__CONTAINER_ID__#}:/var/lib/docker/containers/${#__CONTAINER_ID__#}:ro
+        environment:
+            ELASTICSEARCH_HOST: '${ELASTICSEARCH_HOST}'
+        networks:
+            - logclient
+
+networks:
+    logclient:
+        driver: bridge
