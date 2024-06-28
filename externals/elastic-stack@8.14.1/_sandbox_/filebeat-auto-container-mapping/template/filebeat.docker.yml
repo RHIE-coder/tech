@@ -22,7 +22,7 @@ filebeat.inputs:
                         - not.contains.message: 'Chain head was updated'
       fields:
           container_type: docker
-          environment: production
+          environment: nitro-1
           team: devops
       paths:
           - '/var/lib/docker/containers/${#__CONTAINER_ID__#}/*.log'

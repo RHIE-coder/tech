@@ -1,0 +1,27 @@
+name: filebeat-simple
+setup.ilm.enabled: false
+setup.template.enabled: true
+setup.template.overwrite: true
+setup.template.name: "docker-logs"
+setup.template.pattern: "docker-logs-*"
+
+filebeat.inputs:
+- type: container
+  ignore_older: 24h 
+  processors:
+  - add_docker_metadata: ~
+  - drop_event:
+      when:
+        or:
+          - not.equals.container.name: "arbitrum-building-script-geth-1"
+          - not.contains.message: "block reached canonical chain"
+  fields:
+    id: nitro-2
+    environment: ec2-myInstanceName
+    team: blockchain
+  paths: 
+    - '/var/lib/docker/containers/*/*.log'
+
+output.elasticsearch:
+  hosts: ['${ELASTICSEARCH_HOST}']
+  index: "docker-logs-%{+yyyy.MM.dd}"

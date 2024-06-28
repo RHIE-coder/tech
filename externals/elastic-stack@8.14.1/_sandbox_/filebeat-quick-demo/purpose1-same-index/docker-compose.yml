@@ -1,0 +1,36 @@
+services:
+  filebeat01:
+    image: docker.elastic.co/beats/filebeat:7.17.11
+    container_name: filebeat-01
+    user: root
+    volumes:
+      - ./filebeat.docker.01.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./registry01:/usr/share/filebeat/data/registry 
+    environment:
+      ELASTICSEARCH_HOST: '192.168.9.5:9200'
+    networks:
+      - logclient01
+
+  filebeat02:
+    image: docker.elastic.co/beats/filebeat:7.17.11
+    container_name: filebeat-02
+    user: root
+    volumes:
+      - ./filebeat.docker.02.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./registry02:/usr/share/filebeat/data/registry 
+    environment:
+      ELASTICSEARCH_HOST: '192.168.9.5:9200'
+    networks:
+      - logclient02
+    ports:
+      - "5701:5601"
+
+networks:
+  logclient01:
+    driver: bridge
+  logclient02:
+    driver: bridge
